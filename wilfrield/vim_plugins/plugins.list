@@ -1,0 +1,24 @@
+" Remplace avantageusement NerdTree qui est une merde fin finie avec les buffers
+Plugin 'justinmk/vim-dirvish'
+
+" Barre de statut en bas de la fenetre et ses themes
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Deplacement rapide avec leader-leader-b et leader-leader-w
+"Plugin 'easymotion/vim-easymotion'
+
+" Gestion des marks
+"Plugin 'kshenoy/vim-signature'
+
+" Syntaxe Varnish
+"Plugin 'fgsch/vim-varnish'
+
+" Codi Python
+"Plugin 'metakirby5/codi.vim'
+
+" Folding Python
+"Plugin 'tmhedberg/SimpylFold'
+
+" Afficher la struture du fichier ouvert dans un split a droite
+"Plugin 'majutsushi/tagbar'

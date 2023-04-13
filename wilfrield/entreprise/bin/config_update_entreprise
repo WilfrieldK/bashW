@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+
+if [ ! $(command -v git) ]; then
+    echo -e 'git isnt installed! please install it'
+    exit 1
+fi
+if [ ! $(command -v rsync) ]; then
+    echo -e 'rsync isnt installed! please install it'
+    exit 1
+fi
+
+TMP_DIR=$(mktemp -d)
+cd "${TMP_DIR}"
+
+if [ ! -d "${CONFIG_PATH}/entreprise/" ]; then
+    echo "Le dossier de destination n'existe pas (${CONFIG_PATH}/entreprise/)"
+fi
+
+git clone CPT002@nocdev.celeo.net:r.nentoussi/bash_conf.git
+
+rsync -a --delete --exclude=".git" "bash_conf/" "${CONFIG_PATH}/entreprise/"
+
+cd ${HOME}
+rm -rf "${TMP_DIR}"
+
+CONFIG_OWNER=$(stat -c "%U:%G" ${CONFIG_PATH})
+chown -R "${CONFIG_OWNER}" "${CONFIG_PATH}"

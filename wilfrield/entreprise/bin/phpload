@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+
+if [[ -z "${1}" ]]; then
+    echo -e "Il faut la version de php en argument"
+    exit 1
+fi
+
+declare -a existing_versions=(
+                              53
+                              54
+                              55
+                              56
+                              70
+                              71
+                              72
+                              73
+                             )
+
+declare -a php_executables=(
+                            php
+                            phpize
+                            pecl
+                            php-config
+                            pear
+                           )
+
+
+#[[ " ${existing_versions[@]} " =~ " ${1} " ]] && echo "YES" || echo "NO";
+
+if [[ ! " ${existing_versions[@]} " =~ " ${1} " ]] ; then
+    echo -e "This PHP version doesnt exists!"
+    exit 0
+fi
+
+php_version=$(echo "${1}" | sed -E 's/([0-9]{1})([0-9]{1})/\1.\2/g')
+
+for executable in "${php_executables[@]}"; do
+    alias ${executable}="/usr/local/php-${php_version}/bin/${executable}"
+done

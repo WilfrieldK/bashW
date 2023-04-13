@@ -1,0 +1,9 @@
+celeo-tools
+if [[ -d "/root/celeo-tools" ]]; then cd /root/celeo-tools && git pull webmaster@nocdev.celeo.net:Celeonet/celeo-tools.git; else cd /root && git clone webmaster@nocdev.celeo.net:Celeonet/celeo-tools.git; fi
+mod_celeowaf
+if [[ -d "/root/mod_celeowaf" ]]; then cd /root/mod_celeowaf && git pull webmaster@nocdev.celeo.net:Celeonet/mod_celeowaf.git; else cd /root && git clone webmaster@nocdev.celeo.net:Celeonet/mod_celeowaf.git; fi
+modules-dracut
+if [[ -d "/root/modules-dracut" ]]; then cd /root/modules-dracut && git pull webmaster@nocdev.celeo.net:a.giltaire/modules-dracut.git; else cd /root && git clone webmaster@nocdev.celeo.net:a.giltaire/modules-dracut.git; fi
+shellcheur
+if [[ -d "/root/shellcheur" ]]; then cd /root/shellcheur && git pull webmaster@nocdev.celeo.net:Celeonet/shellcheur.git; else cd /root && git clone webmaster@nocdev.celeo.net:Celeonet/shellcheur.git; fi
+

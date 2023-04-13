@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#mysql_config=$(mysql_config_editor print --login-path=adrien_cfg | grep -c "user")
+
+if [[ -z "${1}" ]]; then
+    echo -e "Il faut le nom du plan en argument"
+    return 1
+else
+    plan="${1}"
+fi
+
+#if [ "${mysql_config}" -lt "1" ]; then
+#    echo -e "Setting MySQL Configuration"
+#    mysql_config_editor set --login-path=adrien_cfg -h 127.0.0.1 -u CeleoAdmin -p
+#fi
+
+req_mail_admin="SELECT username AS user,(SELECT AES_DECRYPT(from_base64(password), '"${plan}"') FROM celeonet_postfix.admin WHERE username LIKE user) AS pass FROM celeonet_postfix.admin;"
+req_mail="SELECT username AS user,(SELECT AES_DECRYPT(from_base64(password), '"${plan}"') FROM celeonet_postfix.mailbox WHERE username LIKE user) AS pass FROM celeonet_postfix.mailbox;"
+req_pureftpd="SELECT User AS username,(SELECT AES_DECRYPT(from_base64(Password), '"${plan}"') FROM celeonet_pureftpd.ftpd WHERE User LIKE username) AS pass, Dir FROM celeonet_pureftpd.ftpd;"
+
+echo -e "==========  MAILS ADMINS  ==========="
+#mysql --login-path=adrien_cfg -BNe "${req_mail_admin}" | column -t
+mysql -BNe "${req_mail_admin}" | column -t
+echo -e ""
+echo -e "==========  MAILS  ==========="
+#mysql --login-path=adrien_cfg -BNe "${req_mail}" | column -t
+mysql -BNe "${req_mail}" | column -t
+echo -e ""
+echo -e "==========  FTP  ==========="
+#mysql --login-path=adrien_cfg -BNe "${req_pureftpd}" | column -t
+mysql -BNe "${req_pureftpd}" | column -t
+echo -e ""

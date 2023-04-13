@@ -1,0 +1,21 @@
+#!/bin/bash
+
+mysql_config=$(mysql_config_editor print --login-path=adrien_cfg | grep -c "user")
+
+if [ "${mysql_config}" -lt "1" ]; then
+    echo -e "Setting MySQL Configuration"
+    mysql_config_editor set --login-path=adrien_cfg -h 127.0.0.1 -u CeleoAdmin -p
+fi
+
+if [[ ! -z "${1}" ]]; then
+    if [[ "${1}" == "update" ]]; then
+        mysql_config_editor set --login-path=adrien_cfg -h 127.0.0.1 -u CeleoAdmin -p
+        exit 0
+    elif [[ "${1}" == "--help" ]] || [[ "${1}" == "help" ]]; then
+        echo "Use 'cmysql update' for password update"
+        exit 0
+    fi
+fi
+
+mysql --login-path=adrien_cfg ${@}
+
